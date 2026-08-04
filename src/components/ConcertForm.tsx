@@ -275,15 +275,15 @@ export function ConcertForm({ userId }: { userId: string }) {
         <div className="card-body gap-4">
           <h2 className="card-title text-lg">Fun rating</h2>
           <p className="text-sm text-base-content/60 -mt-2">
-            How much fun was it? 1 = Terrible Time, 5 = Best Time Ever. This powers your value
-            score (cost ÷ fun).
+            How much fun was it? Rate from 0 to 5 in half-point steps (0, 0.5, 1 … 5). 0 =
+            Terrible Time, 5 = Best Time Ever. This powers your value score (cost ÷ fun).
           </p>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
             <input
               type="range"
-              min={1}
+              min={0}
               max={5}
-              step={1}
+              step={0.5}
               value={form.fun_rating}
               onChange={(e) => update("fun_rating", e.target.value)}
               className="range range-primary"
@@ -291,20 +291,20 @@ export function ConcertForm({ userId }: { userId: string }) {
             <div className="text-center sm:min-w-28">
               <div className="text-3xl font-bold text-primary">{form.fun_rating}</div>
               <div className="text-xs text-base-content/60">
-                {Number(form.fun_rating) <= 1
-                  ? "Terrible Time"
-                  : Number(form.fun_rating) >= 5
-                    ? "Best Time Ever"
-                    : Number(form.fun_rating) === 2
-                      ? "Meh"
-                      : Number(form.fun_rating) === 3
-                        ? "Pretty fun"
-                        : "Great night"}
+                {(() => {
+                  const r = Number(form.fun_rating);
+                  if (r <= 0) return "Terrible Time";
+                  if (r <= 1) return "Rough night";
+                  if (r <= 2) return "Meh";
+                  if (r <= 3) return "Pretty fun";
+                  if (r < 5) return "Great night";
+                  return "Best Time Ever";
+                })()}
               </div>
             </div>
           </div>
           <div className="flex justify-between text-xs text-base-content/50 px-1">
-            <span>1 · Terrible Time</span>
+            <span>0 · Terrible Time</span>
             <span>5 · Best Time Ever</span>
           </div>
         </div>

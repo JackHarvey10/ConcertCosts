@@ -2,6 +2,7 @@ import type { Concert } from "@/lib/concerts";
 import {
   formatCurrency,
   formatDate,
+  formatFunRating,
   formatNumber,
   getCostBreakdown,
   getCostPerHour,
@@ -53,7 +54,7 @@ export function ConcertCard({ concert }: { concert: Concert }) {
             value={
               <span className="inline-flex items-center gap-1">
                 <Star className="h-4 w-4 fill-warning text-warning" />
-                {concert.fun_rating}/5
+                {formatFunRating(concert.fun_rating)}/5
               </span>
             }
           />

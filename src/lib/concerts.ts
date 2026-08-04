@@ -76,14 +76,19 @@ export function getFunPointsPer100(funRating: number, totalCost: number): number
 }
 
 /**
- * Value score = total cost / fun rating (1–5).
+ * Value score = total cost / fun rating (0–5 in half steps).
  * Lower score = more fun per dollar (better value).
  * Higher score = more dollars per fun point (more overpriced).
+ * Returns null when fun rating is 0 (can't divide by zero).
  */
 export function getValueScore(totalCost: number, funRating: number): number | null {
   const fun = toNumber(funRating);
   if (fun <= 0) return null;
   return totalCost / fun;
+}
+
+export function formatFunRating(funRating: number): string {
+  return formatNumber(toNumber(funRating), 1);
 }
 
 export function getCostBreakdown(concert: Concert): CostBreakdown {

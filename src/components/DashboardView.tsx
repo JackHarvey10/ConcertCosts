@@ -16,6 +16,7 @@ import {
 import type { Concert } from "@/lib/concerts";
 import {
   formatCurrency,
+  formatFunRating,
   formatNumber,
   getCostBreakdown,
   getCostPerHour,
@@ -160,7 +161,7 @@ export function DashboardView({ concerts }: { concerts: Concert[] }) {
         <StatCard
           label="Highest fun rating"
           value={highestFun.concert.concert_name}
-          hint={`${highestFun.concert.fun_rating} / 5`}
+          hint={`${formatFunRating(Number(highestFun.concert.fun_rating))} / 5`}
         />
       </div>
 

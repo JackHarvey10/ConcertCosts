@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, LogOut, Music2, PlusCircle } from "lucide-react";
+import { LayoutDashboard, LogOut, Music2, PlusCircle, Search, Sparkles } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { ThemeSelector } from "@/components/ThemeSelector";
 
@@ -10,6 +10,8 @@ const NAV = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/add", label: "Add Concert", icon: PlusCircle },
   { href: "/concerts", label: "My Concerts", icon: Music2 },
+  { href: "/search", label: "Search", icon: Search },
+  { href: "/share", label: "Year in Review", icon: Sparkles },
 ] as const;
 
 export function AppHeader({ email }: { email: string }) {
